@@ -168,11 +168,11 @@
 								<div class="cart_container d-flex flex-row align-items-center justify-content-end">
 									<div class="cart_icon">
 										<img src="images/cart.png" alt="">
-										<div class="cart_count"><span>10</span></div>
+										<div class="cart_count"><span>{{ Cart::count() }}</span></div>
 									</div>
 									<div class="cart_content">
 										<div class="cart_text"><a href="#">Cart</a></div>
-										<div class="cart_price">$85</div>
+                                        <div class="cart_price">{{ $setting->currency }} {{ Cart::total() }}</div>
 									</div>
 								</div>
 							</div>
@@ -305,6 +305,28 @@
 <script src="{{ asset('frontend') }}/js/custom.js"></script>
 <script src="{{ asset('frontend') }}/js/product_custom.js"></script>
 <script src="{{ asset('backend') }}/plugins/toastr/toastr.min.js"></script>
+
+
+<script type="text/javascript" charset="utf-8">
+    function cart() {
+         $.ajax({
+            type:'get',
+            url:'{{ route('all.cart') }}', 
+            dataType: 'json',
+            success:function(data){
+               $('.cart_qty').empty();
+               $('.cart_total').empty();
+               $('.cart_qty').append(data.cart_qty);
+               $('.cart_total').append(data.cart_total);
+            }
+        });
+    }
+    $(document).ready(function(event) {
+        cart();
+    });
+    
+</script>
+
 
 <script>
 	@if(Session::has('messege'))

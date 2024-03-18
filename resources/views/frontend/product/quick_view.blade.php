@@ -28,11 +28,20 @@
               </div>
               <br>
               <div class="order_info">
-                  <form action="#">
+                  <form action="{{ route('add.to.cart.quickview') }}" method="post" id="add_cart_form">
+                      @csrf
+                      {{-- cart add details --}}
+                      <input type="hidden" name="id" value="{{$product->id}}">
+                      @if($product->discount_price==NULL)
+                      <input type="hidden" name="price" value="{{$product->selling_price}}">
+                      @else
+                      <input type="hidden" name="price" value="{{$product->discount_price}}">
+                      @endif
+
                       <div class="form-group">
                           <div class="row">
                               @isset($product->size)
-                                  <div class="col-lg-6">
+                                  <div class="col-lg-4">
                                       <label>Size: </label>
                                       <select class="custom-select form-control-sm" name="size" style="min-width: 120px; ">
                                           @foreach ($sizes as $size)
@@ -43,7 +52,7 @@
                               @endisset
 
                               @isset($product->color)
-                                  <div class="col-lg-6">
+                                  <div class="col-lg-4">
                                       <label>Color:</label>
                                       <select class="custom-select form-control-sm" name="color" style="min-width: 120px;">
                                           @foreach ($color as $row)
@@ -52,7 +61,13 @@
                                       </select>
                                   </div>
                               @endisset
+
+                              <div class="col-lg-4">
+                                <label>Quantity: </label>
+                                  <input type="number" min="1" max="100" name="qty" class=" form-control-sm" value="1" style="min-width: 120px;border:1px solid #ced4da;">
+                              </div>
                           </div>
+
                       </div>
                       <div class="button_container">
                           <div class="input-group mb-3">
@@ -71,3 +86,23 @@
       </div>
   </div>
 </div>
+
+<script>
+    //store  ajax call
+    $('#add_cart_form').submit(function(e){
+        e.preventDefault();
+        var url = $(this).attr('action');
+        var request =$(this).serialize();
+        $.ajax({
+          url:url,
+          type:'post',
+          async:false,
+          data:request,
+          success:function(data){
+            toastr.success(data);
+            $('#add_cart_form')[0].reset();
+            cart();
+          }
+        });
+      });
+</script>

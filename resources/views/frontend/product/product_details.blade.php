@@ -116,14 +116,6 @@
                                     <span class="fa fa-star "></span>
                                     <span class="fa fa-star "></span>
                                 @endif
-
-                                @else
-                                    <span class="fa fa-star checked"></span>
-                                    <span class="fa fa-star "></span>
-                                    <span class="fa fa-star "></span>
-                                    <span class="fa fa-star "></span>
-                                    <span class="fa fa-star "></span>
-                                @endif
                             @endif
                         </div>
 
@@ -142,7 +134,7 @@
                         </div>
 
                         <div class="order_info d-flex flex-row">
-                            <form action="#" method="post" id="add_to_cart">
+                            <form action="{{ route('add.to.cart.quickview') }}"  method="post" id="add_to_cart">
                                 @csrf
                                 <input type="hidden" name="id" value="{{ $product->id }}">
                                 @if ($product->discount_price == null)
@@ -199,10 +191,14 @@
                                     <div class="input-group mb-3">
                                         <div class="input-group-prepend">
 
+                                            @if($product->stock_quantity<1)
+                                            <button class="btn btn-outline-danger" disabled="">Stock Out</button>
+                                            @else
                                             <button class="btn btn-outline-info" type="submit">Add to cart</button>
+                                            @endif
 
                                             <a href="{{ route('add.wishlist', $product->id) }}"
-                                                class="btn btn-outline-primary" type="button">Add to wishlist</a>
+                                            class="btn btn-outline-primary" type="button">Add to wishlist</a>
                                         </div>
                                     </div>
                                 </div>
@@ -488,62 +484,6 @@
             </div>
         </div>
     </div>
-    <!-- Brands -->
-
-    <div class="brands">
-        <div class="container">
-            <div class="row">
-                <div class="col">
-                    <div class="brands_slider_container">
-
-                        <!-- Brands Slider -->
-
-                        <div class="owl-carousel owl-theme brands_slider">
-
-                            <div class="owl-item">
-                                <div class="brands_item d-flex flex-column justify-content-center"><img
-                                        src="{{ asset('frontend') }}/images/brands_1.jpg" alt=""></div>
-                            </div>
-                            <div class="owl-item">
-                                <div class="brands_item d-flex flex-column justify-content-center"><img
-                                        src="{{ asset('frontend') }}/images/brands_2.jpg" alt=""></div>
-                            </div>
-                            <div class="owl-item">
-                                <div class="brands_item d-flex flex-column justify-content-center"><img
-                                        src="{{ asset('frontend') }}/images/brands_3.jpg" alt=""></div>
-                            </div>
-                            <div class="owl-item">
-                                <div class="brands_item d-flex flex-column justify-content-center"><img
-                                        src="{{ asset('frontend') }}/images/brands_4.jpg" alt=""></div>
-                            </div>
-                            <div class="owl-item">
-                                <div class="brands_item d-flex flex-column justify-content-center"><img
-                                        src="{{ asset('frontend') }}/images/brands_5.jpg" alt=""></div>
-                            </div>
-                            <div class="owl-item">
-                                <div class="brands_item d-flex flex-column justify-content-center"><img
-                                        src="{{ asset('frontend') }}/images/brands_6.jpg" alt=""></div>
-                            </div>
-                            <div class="owl-item">
-                                <div class="brands_item d-flex flex-column justify-content-center"><img
-                                        src="{{ asset('frontend') }}/images/brands_7.jpg" alt=""></div>
-                            </div>
-                            <div class="owl-item">
-                                <div class="brands_item d-flex flex-column justify-content-center"><img
-                                        src="{{ asset('frontend') }}/images/brands_8.jpg" alt=""></div>
-                            </div>
-
-                        </div>
-
-                        <!-- Brands Slider Navigation -->
-                        <div class="brands_nav brands_prev"><i class="fas fa-chevron-left"></i></div>
-                        <div class="brands_nav brands_next"><i class="fas fa-chevron-right"></i></div>
-
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
 
     <!-- Newsletter -->
 
@@ -575,4 +515,27 @@
         </div>
     </div>
 
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script>
+        //store  ajax call
+        $('#add_to_cart').submit(function(e){
+            e.preventDefault();
+            var url = $(this).attr('action');
+            var request =$(this).serialize();
+            $.ajax({
+              url:url,
+              type:'post',
+              async:false,
+              data:request,
+              success:function(data){
+                toastr.success(data);
+                $('#add_to_cart')[0].reset();
+                cart();
+              }
+            });
+          });
+    </script>
+
 @endsection
+
+
