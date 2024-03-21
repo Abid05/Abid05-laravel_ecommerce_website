@@ -6,14 +6,12 @@ use App\Http\Controllers\Front\IndexController;
 use App\Http\Controllers\Front\ReviewController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HomeController;
+use Gloudemans\Shoppingcart\Facades\Cart;
 use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\Auth;
 
 
 Auth::routes();
-
-
-
 
 
 Route::get('/login',function(){
@@ -30,11 +28,27 @@ Route::get('/product-details/{slug}',[IndexController::class,'productDetails'])-
 Route::get('/product-quick-view/{id}',[IndexController::class,'productQuickView']);
 
 //cart
-Route::post('/addtocart',[CartController::class,'AddToCartQV'])->name('add.to.cart.quickview');
+Route::get('/all-cart',[CartController::class,'allCart'])->name('all.cart');//ajax req for subtotal
+Route::get('/my-cart',[CartController::class,'MyCart'])->name('cart');
+Route::get('/cart/empty',[CartController::class,'EmptyCart'])->name('cart.empty');
+// Route::get('/checkout',[CartController::class,'Checkout'])->name('checkout');
+// Route::post('/apply/coupon',[CartController::class,'ApplyCoupon'])->name('apply.coupon');
+// Route::get('/remove/coupon',[CartController::class,'RemoveCoupon'])->name('coupon.remove');
+// Route::post('/order/place',[CartController::class,'OrderPlace'])->name('order.place');
+
+
+Route::post('/addtocart',[CartController::class,'addToCartQV'])->name('add.to.cart.quickview');
+Route::get('/cartproduct/remove/{rowId}',[CartController::class,'RemoveProduct']);
+Route::get('/cartproduct/updateqty/{rowId}/{qty}',[CartController::class,'UpdateQty']);
+Route::get('/cartproduct/updatecolor/{rowId}/{color}',[CartController::class,'UpdateColor']);
+Route::get('/cartproduct/updatesize/{rowId}/{size}',[CartController::class,'UpdateSize']);
 
 //review for product
 Route::post('/store/review',[ReviewController::class,'store'])->name('store.review');
-Route::get('/add/wishlist/{id}',[ReviewController::class,'addWishlist'])->name('add.wishlist');
+
+
+//wishlist
+Route::get('/add/wishlist/{id}',[CartController::class,'addWishlist'])->name('add.wishlist');
 
 
 

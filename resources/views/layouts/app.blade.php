@@ -164,18 +164,18 @@
 							</div>
 
 							<!-- Cart -->
-							<div class="cart">
-								<div class="cart_container d-flex flex-row align-items-center justify-content-end">
-									<div class="cart_icon">
-										<img src="images/cart.png" alt="">
-										<div class="cart_count"><span>{{ Cart::count() }}</span></div>
-									</div>
-									<div class="cart_content">
-										<div class="cart_text"><a href="#">Cart</a></div>
-                                        <div class="cart_price">{{ $setting->currency }} {{ Cart::total() }}</div>
-									</div>
-								</div>
-							</div>
+                            <div class="cart">
+                                <div class="cart_container d-flex flex-row align-items-center justify-content-end">
+                                    <div class="cart_icon">
+                                        <img src="{{ asset('frontend') }}/images/cart.png" alt="">
+                                        <div class="cart_count"> <span class="cart_qty"></span></div>
+                                    </div>
+                                    <div class="cart_content">
+                                        <div class="cart_text"><a href="{{ route('cart') }}">Cart</a></div>
+                                        <div class="cart_price">{{ $setting->currency }} <span class="cart_total"></span></div>
+                                    </div>
+                                </div>
+                            </div>
 						</div>
 					</div>
 				</div>
@@ -307,7 +307,7 @@
 <script src="{{ asset('backend') }}/plugins/toastr/toastr.min.js"></script>
 
 
-<script type="text/javascript" charset="utf-8">
+<script>
     function cart() {
          $.ajax({
             type:'get',
@@ -321,11 +321,12 @@
             }
         });
     }
-    $(document).ready(function(event) {
+    $(document).ready(function() {
         cart();
     });
-    
+
 </script>
+
 
 
 <script>

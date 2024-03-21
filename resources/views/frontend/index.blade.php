@@ -8,7 +8,8 @@
      <!-- Banner -->
 
      <div class="banner">
-         <div class="banner_background" style="background-image:url({{ asset('frontend/images/banner_background.jpg') }})"></div>
+         <div class="banner_background" style="background-image:url({{ asset('frontend/images/banner_background.jpg') }})">
+         </div>
          <div class="container fill_height">
              <div class="row fill_height">
                  <div class="banner_product_image"><img src="{{ asset('files/product/' . $bannerproduct->thumbnail) }}"
@@ -110,27 +111,33 @@
                                  @foreach ($today_deal as $row)
                                      <!-- Deals Item -->
                                      <div class="owl-item deals_item">
-                                         <div class="deals_image"><img src="{{ asset('files/product/' . $row->thumbnail) }}" alt=""></div>
+                                         <div class="deals_image"><img
+                                                 src="{{ asset('files/product/' . $row->thumbnail) }}" alt="">
+                                         </div>
                                          <div class="deals_content">
                                              <div class="deals_info_line d-flex flex-row justify-content-start">
-                                                 <div class="deals_item_category"><a href="#">{{ $row->subcategory->subcategory_name }}</a></div>
+                                                 <div class="deals_item_category"><a
+                                                         href="#">{{ $row->subcategory->subcategory_name }}</a></div>
 
-                                                @if ($row->discount_price == null)
-                                                    <div class="deals_item_price_a ml-auto">{{ $setting->currency }}
-                                                            {{ $row->selling_price }}
-                                                    </div>
-                                                @else
-                                                    <div class="deals_item_price_a ml-auto">
-                                                        {{ $setting->currency }} {{ $row->discount_price }}
-                                                    </div>
-                                                @endif
+                                                 @if ($row->discount_price == null)
+                                                     <div class="deals_item_price_a ml-auto">{{ $setting->currency }}
+                                                         {{ $row->selling_price }}
+                                                     </div>
+                                                 @else
+                                                     <div class="deals_item_price_a ml-auto">
+                                                         {{ $setting->currency }} {{ $row->discount_price }}
+                                                     </div>
+                                                 @endif
                                              </div>
                                              <div class="deals_info_line d-flex flex-row justify-content-start">
-                                                 <div class="deals_item_name"><a href="{{ route('product.details', $row->slug) }}">{{ substr($row->name, 0, 15) }}...</a></div>
+                                                 <div class="deals_item_name"><a
+                                                         href="{{ route('product.details', $row->slug) }}">{{ substr($row->name, 0, 15) }}...</a>
+                                                 </div>
                                              </div>
                                              <div class="available">
                                                  <div class="available_line d-flex flex-row justify-content-start">
-                                                     <div class="available_title">Available: <span>{{ $row->stock_quantity }}</span></div>
+                                                     <div class="available_title">Available:
+                                                         <span>{{ $row->stock_quantity }}</span></div>
                                                      <div class="sold_title ml-auto">Already sold: <span>28</span></div>
                                                  </div>
                                                  <div class="available_bar"><span style="width:17%"></span></div>
@@ -212,7 +219,8 @@
                                                      @endif
                                                      <div class="product_name">
                                                          <div>
-                                                            <a href="{{ route('product.details', $row->slug) }}">{{ substr($row->name, 0, 15) }}...</a>
+                                                             <a
+                                                                 href="{{ route('product.details', $row->slug) }}">{{ substr($row->name, 0, 15) }}...</a>
                                                          </div>
                                                      </div>
                                                      <div class="product_extras">

@@ -1,3 +1,5 @@
+
+
 @php
   $color=explode(',',$product->color);
   $sizes=explode(',',$product->size);

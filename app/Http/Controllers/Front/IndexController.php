@@ -37,12 +37,12 @@ class IndexController extends Controller
         return view('frontend.product.product_details',compact('product','related_product','review'));
     }
 
-    //product quick viewsudo chmod -R ug+rwx storage bootstrap/cache
-
+    //product quick view
     public function productQuickView($id){
 
         $product = Product::where('id',$id)->first();
         
         return view('frontend.product.quick_view',compact('product'));
+   
     }
 }

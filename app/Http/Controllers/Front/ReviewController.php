@@ -44,19 +44,6 @@ class ReviewController extends Controller
         return redirect()->back()->with($notification);
     }
 
-    //wishlist
-    public function addWishlist($id){
-        $cheak = DB::table('wishlists')->where('product_id',$id)->where('user_id',Auth::id())->first();
-        if($cheak){
-            $notification=array('messege' => 'Already have it on your wishlist !', 'alert-type' => 'error');
-            return redirect()->back()->with($notification);
-        }else{
-            $data=array();
-            $data['user_id']=Auth::id();
-            $data['product_id']=$id;
-            DB::table('wishlists')->insert($data);
-            $notification=array('messege' => 'Product add on your wishlist !', 'alert-type' => 'success');
-            return redirect()->back()->with($notification);
-        }
-    }
+    
+
 }
