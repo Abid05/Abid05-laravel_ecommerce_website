@@ -2,8 +2,10 @@
 
 use App\Http\Controllers\Controller;
 use App\Http\Controllers\Front\CartController;
+use App\Http\Controllers\Front\CheckoutController;
 use App\Http\Controllers\Front\IndexController;
 use App\Http\Controllers\Front\ReviewController;
+use App\Http\Controllers\Front\ProfileController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HomeController;
 use Gloudemans\Shoppingcart\Facades\Cart;
@@ -31,7 +33,9 @@ Route::get('/product-quick-view/{id}',[IndexController::class,'productQuickView'
 Route::get('/all-cart',[CartController::class,'allCart'])->name('all.cart');//ajax req for subtotal
 Route::get('/my-cart',[CartController::class,'MyCart'])->name('cart');
 Route::get('/cart/empty',[CartController::class,'EmptyCart'])->name('cart.empty');
-// Route::get('/checkout',[CartController::class,'Checkout'])->name('checkout');
+
+//checkout
+Route::get('/checkout',[CheckoutController::class,'Checkout'])->name('checkout');
 // Route::post('/apply/coupon',[CartController::class,'ApplyCoupon'])->name('apply.coupon');
 // Route::get('/remove/coupon',[CartController::class,'RemoveCoupon'])->name('coupon.remove');
 // Route::post('/order/place',[CartController::class,'OrderPlace'])->name('order.place');
@@ -42,10 +46,6 @@ Route::get('/cartproduct/remove/{rowId}',[CartController::class,'RemoveProduct']
 Route::get('/cartproduct/updateqty/{rowId}/{qty}',[CartController::class,'UpdateQty']);
 Route::get('/cartproduct/updatecolor/{rowId}/{color}',[CartController::class,'UpdateColor']);
 Route::get('/cartproduct/updatesize/{rowId}/{size}',[CartController::class,'UpdateSize']);
-
-//review for product
-Route::post('/store/review',[ReviewController::class,'store'])->name('store.review');
-
 
 //wishlist
 Route::get('/wishlist',[CartController::class,'wishlist'])->name('wishlist');
@@ -58,5 +58,22 @@ Route::get('/category/product/{id}',[IndexController::class,'categoryWiseProduct
 Route::get('/subcategory/product/{id}',[IndexController::class,'SubcategoryWiseProduct'])->name('subcategorywise.product');
 Route::get('/childcategory/product/{id}',[IndexController::class,'ChildcategoryWiseProduct'])->name('childcategorywise.product');
 Route::get('/brandwise/product/{id}',[IndexController::class,'BrandWiseProduct'])->name('brandwise.product');
+ 
+//review for product
+Route::post('/store/review',[ReviewController::class,'store'])->name('store.review');
+//this review for website not product
+Route::get('/write/review',[ReviewController::class,'write'])->name('write.review');
+Route::post('/store/website/review',[ReviewController::class,'StoreWebsiteReview'])->name('store.website.review');
 
-  
+//setting profile
+Route::get('/home/setting',[ProfileController::class,'setting'])->name('customer.setting'); 
+Route::post('/home/password/update',[ProfileController::class,'PasswordChange'])->name('customer.password.change'); 
+
+Route::get('/my/order',[ProfileController::class,'MyOrder'])->name('my.order'); 
+Route::get('/view/order/{id}',[ProfileController::class,'ViewOrder'])->name('view.order'); 
+
+//page view
+Route::get('/page/{page_slug}',[IndexController::class,'ViewPage'])->name('view.page');
+
+//newsletter
+Route::post('/store/newsletter',[IndexController::class,'storeNewsletter'])->name('store.newsletter');

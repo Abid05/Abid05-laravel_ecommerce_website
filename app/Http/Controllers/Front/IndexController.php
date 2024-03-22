@@ -23,9 +23,10 @@ class IndexController extends Controller
         $popular_product = Product::where('status',1)->orderBy('product_views','DESC')->limit(16)->get();
         $trendy_product = Product::where('status',1)->where('trendy',1)->orderBy('id','DESC')->limit(8)->get();
         $random_product = Product::where('status',1)->inRandomOrder()->limit(8)->get();
+        $review=DB::table('wbreviews')->where('status',1)->orderBy('id','DESC')->limit(12)->get();
         //homepage_category
         $home_category = DB::table('categories')->where('home_page',1)->orderBy('category_name','ASC')->get();
-        return view('frontend.index',compact('category','bannerproduct','featured','popular_product','trendy_product','home_category','brand','random_product','today_deal'));
+        return view('frontend.index',compact('category','bannerproduct','featured','popular_product','trendy_product','home_category','brand','random_product','today_deal','review'));
     }
 
     //single product page calling method
@@ -89,6 +90,30 @@ class IndexController extends Controller
         $products=DB::table('products')->where('brand_id',$id)->paginate(60);
         $random_product=Product::where('status',1)->inRandomOrder()->limit(16)->get();
         return view('frontend.product.brandwise_product',compact('categories','brands','products','random_product','brand'));
+    }
+
+     //page view method
+     public function ViewPage($page_slug)
+     {
+         $page=DB::table('pages')->where('page_slug',$page_slug)->first();
+         return view('frontend.page',compact('page'));
+     }
+
+    //store newsletter
+    public function storeNewsletter(Request $request)
+    {
+        $email=$request->email;
+        $check=DB::table('newsletters')->where('email',$email)->first();
+        if ($check) {
+            return response()->json('Email Already Exist!');
+        }else{
+              $data=array();
+              $data['email']=$request->email;
+              DB::table('newsletters')->insert($data);
+              return response()->json('Thanks for subscribe us!');  
+        }
+       
+
     }
  
 }
