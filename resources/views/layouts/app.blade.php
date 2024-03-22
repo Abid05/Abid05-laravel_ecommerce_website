@@ -23,6 +23,7 @@
     <link rel="stylesheet" type="text/css" href="{{ asset('frontend') }}/styles/responsive.css">
 	<link rel="stylesheet" type="text/css" href="{{ asset('backend') }}/plugins/toastr/toastr.css">
 
+
 </head>
 
 <body>
@@ -156,9 +157,9 @@
 					<div class="col-lg-4 col-9 order-lg-3 order-2 text-lg-left text-right">
 						<div class="wishlist_cart d-flex flex-row align-items-center justify-content-end">
 							<div class="wishlist d-flex flex-row align-items-center justify-content-end">
-								<div class="wishlist_icon"><img src="images/heart.png" alt=""></div>
+								<div class="wishlist_icon"><img src="{{ asset('frontend') }}/images/heart.png" alt=""></div>
 								<div class="wishlist_content">
-									<div class="wishlist_text"><a href="#">Wishlist</a></div>
+									<div class="wishlist_text"><a href="{{ route('wishlist') }}">Wishlist</a></div>
 									<div class="wishlist_count">{{ $wishlist }}</div>
 								</div>
 							</div>
@@ -305,6 +306,7 @@
 <script src="{{ asset('frontend') }}/js/custom.js"></script>
 <script src="{{ asset('frontend') }}/js/product_custom.js"></script>
 <script src="{{ asset('backend') }}/plugins/toastr/toastr.min.js"></script>
+
 
 
 <script>

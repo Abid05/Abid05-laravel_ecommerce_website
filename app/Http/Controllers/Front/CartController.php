@@ -91,6 +91,7 @@ class CartController extends Controller
                 $data = array();
                 $data['product_id'] = $id;
                 $data['user_id'] = $userId;
+                $data['date'] = date('d,F Y');
                 DB::table('wishlists')->insert($data);
                 $notification = array('messege' => 'Product added to wishlist!', 'alert-type' => 'success');
                 return redirect()->back()->with($notification);
@@ -100,5 +101,30 @@ class CartController extends Controller
             $notification = array('messege' => 'Login to your account!', 'alert-type' => 'error');
             return redirect()->back()->with($notification);
         
+    }
+
+    public function wishlist()
+    {
+        if (Auth::check()) {
+               $wishlist=DB::table('wishlists')->leftJoin('products','wishlists.product_id','products.id')->select('products.name','products.thumbnail','products.slug','wishlists.*')->where('wishlists.user_id',Auth::id())->get();
+
+               return view('frontend.cart.wishlist',compact('wishlist'));
+        }
+        $notification=array('messege' => 'At first login your account', 'alert-type' => 'error');
+        return redirect()->back()->with($notification);
+    }
+
+    public function Clearwishlist()
+    {
+        DB::table('wishlists')->where('user_id',Auth::id())->delete();
+        $notification=array('messege' => 'Wishlist Clear', 'alert-type' => 'success');
+        return redirect()->back()->with($notification);
+    }
+
+    public function WishlistProductdelete($id)
+    {
+        DB::table('wishlists')->where('id',$id)->delete();
+        $notification=array('messege' => 'Successfully Deleted!', 'alert-type' => 'success');
+        return redirect()->back()->with($notification);
     }
 }

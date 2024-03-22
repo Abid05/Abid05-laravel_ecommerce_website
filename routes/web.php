@@ -48,8 +48,15 @@ Route::post('/store/review',[ReviewController::class,'store'])->name('store.revi
 
 
 //wishlist
+Route::get('/wishlist',[CartController::class,'wishlist'])->name('wishlist');
+Route::get('/clear/wishlist',[CartController::class,'Clearwishlist'])->name('clear.wishlist');
 Route::get('/add/wishlist/{id}',[CartController::class,'addWishlist'])->name('add.wishlist');
+Route::get('/wishlist/product/delete/{id}',[CartController::class,'WishlistProductdelete'])->name('wishlistproduct.delete');
 
-
+//categorywise product
+Route::get('/category/product/{id}',[IndexController::class,'categoryWiseProduct'])->name('categorywise.product');
+Route::get('/subcategory/product/{id}',[IndexController::class,'SubcategoryWiseProduct'])->name('subcategorywise.product');
+Route::get('/childcategory/product/{id}',[IndexController::class,'ChildcategoryWiseProduct'])->name('childcategorywise.product');
+Route::get('/brandwise/product/{id}',[IndexController::class,'BrandWiseProduct'])->name('brandwise.product');
 
   
