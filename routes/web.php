@@ -36,8 +36,8 @@ Route::get('/cart/empty',[CartController::class,'EmptyCart'])->name('cart.empty'
 
 //checkout
 Route::get('/checkout',[CheckoutController::class,'Checkout'])->name('checkout');
-// Route::post('/apply/coupon',[CartController::class,'ApplyCoupon'])->name('apply.coupon');
-// Route::get('/remove/coupon',[CartController::class,'RemoveCoupon'])->name('coupon.remove');
+Route::post('/apply/coupon',[CheckoutController::class,'ApplyCoupon'])->name('apply.coupon');
+Route::get('/remove/coupon',[CheckoutController::class,'RemoveCoupon'])->name('coupon.remove');
 // Route::post('/order/place',[CartController::class,'OrderPlace'])->name('order.place');
 
 

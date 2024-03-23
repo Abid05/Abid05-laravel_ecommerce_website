@@ -12,7 +12,7 @@
                     <div class="cart_container card p-1">
                         <div class="cart_title text-center">Billing Address</div>
 
-                        <form action="{{ route('order.place') }}" method="post" id="order-place">
+                        <form action="#" method="post" id="order-place">
                             @csrf
                             <div class="row p-4">
                                 <div class="form-group col-lg-6">
