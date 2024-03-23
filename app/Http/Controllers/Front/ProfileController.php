@@ -7,6 +7,7 @@ use App\Models\User;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class ProfileController extends Controller
 {
@@ -43,5 +44,11 @@ class ProfileController extends Controller
             $notification=array('messege' => 'Old Password Not Matched!', 'alert-type' => 'error');
             return redirect()->back()->with($notification);
         }
+    }
+
+    public function MyOrder()
+    {
+       $orders=DB::table('orders')->where('user_id',Auth::id())->orderBy('id','DESC')->get();
+       return view('user.my_order',compact('orders'));
     }
 }
