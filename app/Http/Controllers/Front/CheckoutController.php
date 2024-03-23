@@ -3,12 +3,14 @@
 namespace App\Http\Controllers\Front;
 
 use App\Http\Controllers\Controller;
+use App\Mail\InvoiceMail;
 use Gloudemans\Shoppingcart\Facades\Cart;
+use Illuminate\Contracts\Mail\Mailer;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
-
+use Illuminate\Support\Facades\Mail;
 
 class CheckoutController extends Controller
 {
@@ -92,6 +94,9 @@ class CheckoutController extends Controller
             $order['year']=date('Y');
 
             $order_id=DB::table('orders')->insertGetId($order);
+
+            //Mail Send
+            Mail::to($request->c_email)->send(new InvoiceMail($order));
 
             //order details
             $content=Cart::content();
