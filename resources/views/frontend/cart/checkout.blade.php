@@ -1,7 +1,7 @@
 @extends('layouts.app')
 @section('content')
-    <link rel="stylesheet" type="text/css" href="{{ asset('public/frontend') }}/styles/cart_styles.css">
-    <link rel="stylesheet" type="text/css" href="{{ asset('public/frontend') }}/styles/cart_responsive.css">
+    <link rel="stylesheet" type="text/css" href="{{ asset('frontend') }}/styles/cart_styles.css">
+    <link rel="stylesheet" type="text/css" href="{{ asset('frontend') }}/styles/cart_responsive.css">
     @include('layouts.front_partial.collaps_nav')
 
 
@@ -12,7 +12,7 @@
                     <div class="cart_container card p-1">
                         <div class="cart_title text-center">Billing Address</div>
 
-                        <form action="#" method="post" id="order-place">
+                        <form action="{{ route('order.place') }}" method="post" id="order-place">
                             @csrf
                             <div class="row p-4">
                                 <div class="form-group col-lg-6">

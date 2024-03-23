@@ -33,19 +33,17 @@ Route::get('/product-quick-view/{id}',[IndexController::class,'productQuickView'
 Route::get('/all-cart',[CartController::class,'allCart'])->name('all.cart');//ajax req for subtotal
 Route::get('/my-cart',[CartController::class,'MyCart'])->name('cart');
 Route::get('/cart/empty',[CartController::class,'EmptyCart'])->name('cart.empty');
-
-//checkout
-Route::get('/checkout',[CheckoutController::class,'Checkout'])->name('checkout');
-Route::post('/apply/coupon',[CheckoutController::class,'ApplyCoupon'])->name('apply.coupon');
-Route::get('/remove/coupon',[CheckoutController::class,'RemoveCoupon'])->name('coupon.remove');
-// Route::post('/order/place',[CartController::class,'OrderPlace'])->name('order.place');
-
-
 Route::post('/addtocart',[CartController::class,'addToCartQV'])->name('add.to.cart.quickview');
 Route::get('/cartproduct/remove/{rowId}',[CartController::class,'RemoveProduct']);
 Route::get('/cartproduct/updateqty/{rowId}/{qty}',[CartController::class,'UpdateQty']);
 Route::get('/cartproduct/updatecolor/{rowId}/{color}',[CartController::class,'UpdateColor']);
 Route::get('/cartproduct/updatesize/{rowId}/{size}',[CartController::class,'UpdateSize']);
+
+//checkout
+Route::get('/checkout',[CheckoutController::class,'Checkout'])->name('checkout');
+Route::post('/apply/coupon',[CheckoutController::class,'ApplyCoupon'])->name('apply.coupon');
+Route::get('/remove/coupon',[CheckoutController::class,'RemoveCoupon'])->name('coupon.remove');
+Route::post('/order/place',[CheckoutController::class,'OrderPlace'])->name('order.place');
 
 //wishlist
 Route::get('/wishlist',[CartController::class,'wishlist'])->name('wishlist');
