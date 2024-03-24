@@ -24,10 +24,13 @@ Route::get('/home', [HomeController::class, 'index'])->name('home');
 Route::get('/customer/logout', [HomeController::class, 'logout'])->name('customer.logout');
 
 //Frontend routes
-
 Route::get('/',[IndexController::class,'index']);
 Route::get('/product-details/{slug}',[IndexController::class,'productDetails'])->name('product.details');
 Route::get('/product-quick-view/{id}',[IndexController::class,'productQuickView']);
+
+//order tracking
+Route::get('/order/tracking',[IndexController::class,'OrderTracking'])->name('order.tracking');
+Route::post('/check/order',[IndexController::class,'CheckOrder'])->name('check.order');
 
 //cart
 Route::get('/all-cart',[CartController::class,'allCart'])->name('all.cart');//ajax req for subtotal
@@ -82,3 +85,4 @@ Route::get('/new/ticket',[ProfileController::class,'NewTicket'])->name('new.tick
 Route::post('/store/ticket',[ProfileController::class,'StoreTicket'])->name('store.ticket');
 Route::get('/show/ticket/{id}',[ProfileController::class,'ticketShow'])->name('show.ticket');
 Route::post('/reply/ticket',[ProfileController::class,'ReplyTicket'])->name('reply.ticket');
+
