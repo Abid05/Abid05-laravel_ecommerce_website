@@ -11,6 +11,7 @@ use App\Http\Controllers\Admin\PickupController;
 use App\Http\Controllers\Admin\ProductController;
 use App\Http\Controllers\Admin\SettingController;
 use App\Http\Controllers\Admin\SubcategoryController;
+use App\Http\Controllers\Admin\TicketController;
 use App\Http\Controllers\Admin\WarehouseController;
 use App\Http\Controllers\Auth\LoginController;
 
@@ -163,6 +164,16 @@ Route::group(['middleware' => 'is_admin'],function(){
             Route::get('/edit/{id}',[PickupController::class,'edit']);
             Route::post('/update/{id}',[PickupController::class,'update'])->name('pickuppoint.update');
         });
+
+        //Ticket 
+		Route::group(['prefix'=>'ticket'], function(){
+			Route::get('/',[TicketController::class,'index'])->name('ticket.index');
+			Route::get('/ticket/show/{id}',[TicketController::class,'show'])->name('admin.ticket.show');
+			Route::post('/ticket/reply',[TicketController::class,'ReplyTicket'])->name('admin.store.reply');
+			Route::get('/ticket/close/{id}',[TicketController::class,'CloseTicket'])->name('admin.close.ticket');
+			Route::delete('/ticket/delete/{id}',[TicketController::class,'destroy'])->name('admin.ticket.delete');
+			
+	    });
         
     });
 });

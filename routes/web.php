@@ -75,3 +75,10 @@ Route::get('/page/{page_slug}',[IndexController::class,'ViewPage'])->name('view.
 
 //newsletter
 Route::post('/store/newsletter',[IndexController::class,'storeNewsletter'])->name('store.newsletter');
+
+//support ticket
+Route::get('/open/ticket',[ProfileController::class,'ticket'])->name('open.ticket');
+Route::get('/new/ticket',[ProfileController::class,'NewTicket'])->name('new.ticket');
+Route::post('/store/ticket',[ProfileController::class,'StoreTicket'])->name('store.ticket');
+Route::get('/show/ticket/{id}',[ProfileController::class,'ticketShow'])->name('show.ticket');
+Route::post('/reply/ticket',[ProfileController::class,'ReplyTicket'])->name('reply.ticket');

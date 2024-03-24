@@ -11,17 +11,13 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('tickets', function (Blueprint $table) {
+        Schema::create('replies', function (Blueprint $table) {
             $table->id();
-            $table->integer('user_id')->nullable();
-            $table->string('subject')->nullable();
-            $table->string('service')->nullable();
-            $table->string('priority')->nullable();
+            $table->unsignedBigInteger('ticket_id');
             $table->text('message')->nullable();
             $table->string('image')->nullable();
-            $table->integer('status')->nullable()->default(0);
-            $table->string('date')->nullable();
             $table->timestamps();
+            $table->foreign('ticket_id')->references('id')->on('tickets')->onDelete('cascade');
         });
     }
 
@@ -30,6 +26,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('tickets');
+        Schema::dropIfExists('replies');
     }
 };
