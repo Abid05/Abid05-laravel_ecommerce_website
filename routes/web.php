@@ -6,6 +6,7 @@ use App\Http\Controllers\Front\CheckoutController;
 use App\Http\Controllers\Front\IndexController;
 use App\Http\Controllers\Front\ReviewController;
 use App\Http\Controllers\Front\ProfileController;
+use App\Http\Controllers\Front\SslCommerzPaymentController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HomeController;
 use Gloudemans\Shoppingcart\Facades\Cart;
@@ -48,6 +49,12 @@ Route::post('/apply/coupon',[CheckoutController::class,'ApplyCoupon'])->name('ap
 Route::get('/remove/coupon',[CheckoutController::class,'RemoveCoupon'])->name('coupon.remove');
 Route::post('/order/place',[CheckoutController::class,'OrderPlace'])->name('order.place');
 
+//payment_gateway
+Route::post('/success',[CheckoutController::class,'success'])->name('success');
+Route::post('/fail',[CheckoutController::class,'fail'])->name('fail');
+Route::get('/cancel',[CheckoutController::class,'cancel'])->name('cancel');
+
+
 //wishlist
 Route::get('/wishlist',[CartController::class,'wishlist'])->name('wishlist');
 Route::get('/clear/wishlist',[CartController::class,'Clearwishlist'])->name('clear.wishlist');
@@ -86,3 +93,14 @@ Route::post('/store/ticket',[ProfileController::class,'StoreTicket'])->name('sto
 Route::get('/show/ticket/{id}',[ProfileController::class,'ticketShow'])->name('show.ticket');
 Route::post('/reply/ticket',[ProfileController::class,'ReplyTicket'])->name('reply.ticket');
 
+// // SSLCOMMERZ Start
+// Route::get('/example1', [SslCommerzPaymentController::class, 'exampleEasyCheckout']);
+// Route::post('/pay-via-ajax', [SslCommerzPaymentController::class, 'payViaAjax'])->name('order.place');
+// Route::post('/success', [SslCommerzPaymentController::class, 'success']);
+// Route::post('/fail', [SslCommerzPaymentController::class, 'fail']);
+// Route::post('/cancel', [SslCommerzPaymentController::class, 'cancel']);
+// Route::post('/ipn', [SslCommerzPaymentController::class, 'ipn']);
+// //SSLCOMMERZ END
+// // Route::get('/example2', [SslCommerzPaymentController::class, 'exampleHostedCheckout']);
+
+// // Route::post('/pay', [SslCommerzPaymentController::class, 'index']);

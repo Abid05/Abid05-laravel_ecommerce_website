@@ -127,24 +127,36 @@ Route::group(['middleware' => 'is_admin'],function(){
 
     //settings route
     Route::group(['prefix'=>'setting'],function(){
+
         //seo setting
         Route::group(['prefix'=>'seo'],function(){
 
             Route::get('/',[SettingController::class,'seo'])->name('seo.setting');
             Route::post('/update/{id}',[SettingController::class,'seoUpdate'])->name('seo.setting.update');
         });
+
         //smtp setting
         Route::group(['prefix'=>'smtp'],function(){
 
             Route::get('/',[SettingController::class,'smtp'])->name('smtp.setting');
             Route::post('/update/{id}',[SettingController::class,'smtpUpdate'])->name('smtp.setting.update');
         });
+
         //website setting
         Route::group(['prefix'=>'website'],function(){
 
             Route::get('/',[SettingController::class,'website'])->name('website.setting');
             Route::post('/update/{id}',[SettingController::class,'websiteUpdate'])->name('website.setting.update');
         });
+
+        //website payment setting
+		Route::group(['prefix'=>'payment-gateway'], function(){
+			Route::get('/',[SettingController::class,'PaymentGateway'])->name('payment.gateway');
+			Route::post('/update-aamarpay',[SettingController::class,'AamarpayUpdate'])->name('update.aamarpay');
+			Route::post('/update-surjopay',[SettingController::class,'SurjopayUpdate'])->name('update.surjopay');
+			Route::post('/update-sslcommerce',[SettingController::class,'sslCommerceUpdate'])->name('update.sslcommerce');
+	    });
+
         //page setting
         Route::group(['prefix'=>'page'],function(){
 
@@ -155,6 +167,7 @@ Route::group(['middleware' => 'is_admin'],function(){
             Route::get('/edit/{id}',[PageController::class,'edit'])->name('page.edit');
             Route::post('/update/{id}',[PageController::class,'update'])->name('page.update');
         });
+
         //pickup setting
         Route::group(['prefix'=>'pickup'],function(){
 

@@ -119,8 +119,8 @@ class ProfileController extends Controller
               //working with image
                   $photo=$request->image;
                   $photoname=uniqid().'.'.$photo->getClientOriginalExtension();
-                  Image::make($photo)->resize(600,350)->save('public/files/ticket/'.$photoname);  //image intervention
-                  $data['image']='public/files/ticket/'.$photoname;   // public/files/brand/plus-point.jpg
+                  Image::make($photo)->resize(600,350)->save('files/ticket/'.$photoname);  //image intervention
+                  $data['image']='files/ticket/'.$photoname;   // public/files/brand/plus-point.jpg
          }
         
         DB::table('replies')->insert($data);
