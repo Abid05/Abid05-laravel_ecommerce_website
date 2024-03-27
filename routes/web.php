@@ -33,6 +33,9 @@ Route::get('/product-quick-view/{id}',[IndexController::class,'productQuickView'
 Route::get('/order/tracking',[IndexController::class,'OrderTracking'])->name('order.tracking');
 Route::post('/check/order',[IndexController::class,'CheckOrder'])->name('check.order');
 
+//contact-us
+Route::get('/contact-us',[IndexController::class,'Contact'])->name('contact');
+
 //cart
 Route::get('/all-cart',[CartController::class,'allCart'])->name('all.cart');//ajax req for subtotal
 Route::get('/my-cart',[CartController::class,'MyCart'])->name('cart');

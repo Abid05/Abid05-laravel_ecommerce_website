@@ -268,8 +268,8 @@
                                 <li><a href="{{ route('home') }}">My Account</a></li>
                                 <li><a href="{{ route('order.tracking') }}">Order Tracking</a></li>
                                 <li><a href="{{ route('wishlist') }}">Wish List</a></li>
-                                <li><a href="">Our Blog</a></li>
-                                <li><a href="">Contact Us</a></li>
+                                <li><a href="#">Our Blog</a></li>
+                                <li><a href="{{ route('contact') }}">Contact Us</a></li>
                                 <li><a href="#">Become a vendor</a></li>
                             </ul>
                         </div>
