@@ -26,7 +26,9 @@ class IndexController extends Controller
         $review=DB::table('wbreviews')->where('status',1)->orderBy('id','DESC')->limit(12)->get();
         //homepage_category
         $home_category = DB::table('categories')->where('home_page',1)->orderBy('category_name','ASC')->get();
-        return view('frontend.index',compact('category','bannerproduct','featured','popular_product','trendy_product','home_category','brand','random_product','today_deal','review'));
+
+        $campaign=DB::table('campaigns')->where('status',1)->orderBy('id','DESC')->first();
+        return view('frontend.index',compact('category','bannerproduct','featured','popular_product','trendy_product','home_category','brand','random_product','today_deal','review','campaign'));
     }
 
     //single product page calling method

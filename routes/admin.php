@@ -6,6 +6,7 @@ use App\Http\Controllers\Admin\CampaignController;
 use App\Http\Controllers\Admin\CategoryController;
 use App\Http\Controllers\Admin\ChildCategoryController;
 use App\Http\Controllers\Admin\CouponController;
+use App\Http\Controllers\Admin\OrderController;
 use App\Http\Controllers\Admin\PageController;
 use App\Http\Controllers\Admin\PickupController;
 use App\Http\Controllers\Admin\ProductController;
@@ -115,6 +116,17 @@ Route::group(['middleware' => 'is_admin'],function(){
         Route::post('/update',[CampaignController::class,'update'])->name('campaign.update');
     });
 
+    //__order 
+	Route::group(['prefix'=>'order'], function(){
+		Route::get('/',[OrderController::class,'index'])->name('admin.order.index');
+		// Route::post('/store','CampaignController::class,'store')->name('campaign.store');
+		Route::get('/admin/edit/{id}',[OrderController::class,'Editorder']);
+		Route::post('/update/order/status',[OrderController::class,'updateStatus'])->name('update.order.status');
+		Route::get('/view/admin/{id}',[OrderController::class,'ViewOrder']);
+		Route::get('/delete/{id}',[OrderController::class,'delete'])->name('order.delete');
+		 
+	});
+
     //warehouse route
     Route::group(['prefix'=>'warehouse'],function(){
 
@@ -172,10 +184,10 @@ Route::group(['middleware' => 'is_admin'],function(){
         Route::group(['prefix'=>'pickup'],function(){
 
             Route::get('/',[PickupController::class,'index'])->name('pickuppoint.index');
-            Route::post('/store',[PickupController::class,'store'])->name('pickuppoint.store');
-            Route::delete('/delete/{id}',[PickupController::class,'destroy'])->name('pickuppoint.delete');
+            Route::post('/store',[PickupController::class,'store'])->name('store.pickup.point');
+            Route::delete('/delete/{id}',[PickupController::class,'destroy'])->name('pickup.point.delete');
             Route::get('/edit/{id}',[PickupController::class,'edit']);
-            Route::post('/update/{id}',[PickupController::class,'update'])->name('pickuppoint.update');
+            Route::post('/update',[PickupController::class,'update'])->name('update.pickup.point');
         });
 
         //Ticket 

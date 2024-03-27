@@ -43,14 +43,12 @@
                     <div class="row">
                         <div class="col d-flex flex-row">
                             <div class="top_bar_contact_item">
-                                <div class="top_bar_icon"><img src="images/phone.png" alt=""></div>+38 068 005
-                                3570
+                                <div class="top_bar_icon"><img src="images/phone.png" alt=""></div>
+                                {{ $setting->phone_one }}
                             </div>
                             <div class="top_bar_contact_item">
                                 <div class="top_bar_icon"><img src="images/mail.png" alt=""></div><a
-                                    href="https://colorlib.com/cdn-cgi/l/email-protection#234542505750424f465063444e424a4f0d404c4e"><span
-                                        class="__cf_email__"
-                                        data-cfemail="34525547404755585147745359555d581a575b59">[email&#160;protected]</span></a>
+                                    href="mailto:{{ $setting->main_email }}">{{ $setting->main_email }}</a>
                             </div>
                             <div class="top_bar_content ml-auto">
                                 @if (Auth::check())
