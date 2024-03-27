@@ -127,6 +127,13 @@ Route::group(['middleware' => 'is_admin'],function(){
 		 
 	});
 
+    //__report routes__//
+    Route::group(['prefix'=>'report'], function(){
+        Route::get('/order',[OrderController::class,'Reportindex'])->name('report.order.index');
+        Route::get('/order/print',[OrderController::class,'ReportOrderPrint'])->name('report.order.print');
+        
+    });
+
     //warehouse route
     Route::group(['prefix'=>'warehouse'],function(){
 

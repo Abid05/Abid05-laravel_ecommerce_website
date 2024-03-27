@@ -89,6 +89,9 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/Dropify/0.2.2/js/dropify.js"></script>
 <!-- summernote -->
 <script src="{{ asset('backend') }}/plugins/summernote/summernote-bs4.min.js"></script>
+<!-- printThis -->
+@stack('script')
+
 <!-- DataTables  & Plugins -->
 <script src="{{ asset('backend') }}/plugins/datatables/jquery.dataTables.min.js"></script>
 <script src="{{ asset('backend') }}/plugins/datatables-bs4/js/dataTables.bootstrap4.min.js"></script>
@@ -169,6 +172,7 @@
  @endif
 </script>
 
+
 <script>
   $(function () {
     $("#example1").DataTable({
@@ -188,3 +192,4 @@
 </script>
 </body>
 </html>
+
